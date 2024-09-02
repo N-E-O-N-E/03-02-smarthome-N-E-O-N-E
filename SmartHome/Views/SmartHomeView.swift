@@ -14,6 +14,8 @@ struct SmartHomeView: View {
     
     var body: some View {
         
+        
+        
         VStack() {
             
             Image("logo")
