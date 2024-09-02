@@ -50,7 +50,7 @@ struct SmartHomeView: View {
                 
             }.padding()
             
-            
+            // Text(texteingabe)
             TextView(texteingabe: $texteingabe)
             Divider()
             
