@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		CE75F13D2C81D157001AD0A3 /* SmartHomeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75F13C2C81D157001AD0A3 /* SmartHomeApp.swift */; };
-		CE75F13F2C81D157001AD0A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75F13E2C81D157001AD0A3 /* ContentView.swift */; };
 		CE75F1412C81D158001AD0A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F1402C81D158001AD0A3 /* Assets.xcassets */; };
 		CE75F1442C81D158001AD0A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F1432C81D158001AD0A3 /* Preview Assets.xcassets */; };
+		FA9F481E2C85CB1600E2DA8A /* SmartHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F481D2C85CB1600E2DA8A /* SmartHomeView.swift */; };
+		FA9F48202C85D0B300E2DA8A /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F481F2C85D0B300E2DA8A /* TextView.swift */; };
+		FA9F48222C85D48400E2DA8A /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F48212C85D48400E2DA8A /* RoomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE75F1392C81D157001AD0A3 /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE75F13C2C81D157001AD0A3 /* SmartHomeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeApp.swift; sourceTree = "<group>"; };
-		CE75F13E2C81D157001AD0A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE75F1402C81D158001AD0A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE75F1432C81D158001AD0A3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FA9F481D2C85CB1600E2DA8A /* SmartHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeView.swift; sourceTree = "<group>"; };
+		FA9F481F2C85D0B300E2DA8A /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		FA9F48212C85D48400E2DA8A /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +55,9 @@
 		CE75F13B2C81D157001AD0A3 /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				FA9F481C2C85CAE500E2DA8A /* Views */,
+				FA9F481B2C85CAE000E2DA8A /* Models */,
 				CE75F13C2C81D157001AD0A3 /* SmartHomeApp.swift */,
-				CE75F13E2C81D157001AD0A3 /* ContentView.swift */,
 				CE75F1402C81D158001AD0A3 /* Assets.xcassets */,
 				CE75F1422C81D158001AD0A3 /* Preview Content */,
 			);
@@ -65,6 +70,23 @@
 				CE75F1432C81D158001AD0A3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FA9F481B2C85CAE000E2DA8A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA9F481C2C85CAE500E2DA8A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA9F481D2C85CB1600E2DA8A /* SmartHomeView.swift */,
+				FA9F481F2C85D0B300E2DA8A /* TextView.swift */,
+				FA9F48212C85D48400E2DA8A /* RoomView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +159,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE75F13F2C81D157001AD0A3 /* ContentView.swift in Sources */,
+				FA9F48202C85D0B300E2DA8A /* TextView.swift in Sources */,
+				FA9F48222C85D48400E2DA8A /* RoomView.swift in Sources */,
 				CE75F13D2C81D157001AD0A3 /* SmartHomeApp.swift in Sources */,
+				FA9F481E2C85CB1600E2DA8A /* SmartHomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
