@@ -13,9 +13,7 @@ struct SmartHomeView: View {
     @State private var anzeigen = false
     
     var body: some View {
-        
-        
-        
+    
         VStack() {
             
             Image("logo")
