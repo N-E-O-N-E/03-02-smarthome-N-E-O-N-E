@@ -13,7 +13,7 @@ struct TextView: View {
     var body: some View {
         
         Text(texteingabe)
-            .font(.title).bold()
+            .font(.title3).foregroundColor(.green)
         
     }
 }

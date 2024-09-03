@@ -10,7 +10,7 @@ import Foundation
 
 struct SmartDevice: Identifiable {
     
-    let id: UUID
+    var id: UUID
     var name: String
     var type: DeviceType
     var isOn: Bool

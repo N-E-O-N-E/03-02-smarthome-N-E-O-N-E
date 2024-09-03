@@ -26,4 +26,11 @@ enum DeviceType: CustomStringConvertible {
 }
 
 
-
+// Zugriff über RawValue
+//
+//enum DeviceType: String {
+//    
+//    case light = "Licht"
+//    case thermostat = "Temperatur"
+//    case lock = "Schloss"
+//}
