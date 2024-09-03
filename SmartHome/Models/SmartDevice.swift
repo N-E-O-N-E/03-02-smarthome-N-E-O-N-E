@@ -10,12 +10,26 @@ import Foundation
 
 struct SmartDevice: Identifiable {
     
+    
+    
     var id: UUID
     var name: String
     var type: DeviceType
-    var isOn: Bool
-    var temperature: Double
-    var isLocket: Bool
+    var isOn: Bool {
+        didSet {
+            print("Licht wurde verändert!")
+        }
+    }
+    var temperature: Double {
+        didSet {
+            print("Temperatur wurde verändert!")
+        }
+    }
+    var isLocket: Bool {
+        didSet {
+            print("Schloss wurde verändert!")
+        }
+    }
     
         
 

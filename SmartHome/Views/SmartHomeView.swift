@@ -14,11 +14,11 @@ struct SmartHomeView: View {
     @State private var anzeigen = false
     @State private var smartDevices = [
         SmartDevice(id: UUID(), name: "Wohnzimmerlicht", type: .light, isOn: false, temperature: 0.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Heizung", type: .thermostat, isOn: true, temperature: 20.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Heizung", type: .thermostat, isOn: true, temperature: 26.0, isLocket: false),
         SmartDevice(id: UUID(), name: "Haustür", type: .lock, isOn: false, temperature: 0.0, isLocket: true),
         SmartDevice(id: UUID(), name: "Küchenlicht", type: .light, isOn: false, temperature: 0.0, isLocket: true),
         SmartDevice(id: UUID(), name: "Gartentür", type: .lock, isOn: false, temperature: 0.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Kellerraum", type: .thermostat, isOn: false, temperature: 18.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Kellerraum", type: .thermostat, isOn: false, temperature: 12.0, isLocket: false),
         SmartDevice(id: UUID(), name: "Toilettentür", type: .lock, isOn: false, temperature: 0.0, isLocket: true)
     ]
     @State private var gridAnsicht: Bool = true
@@ -57,8 +57,9 @@ struct SmartHomeView: View {
 //                    }
                     
                     Button(action: {
-                        //SWITCH GRID
+
                         gridAnsicht.toggle()
+                        
                     }, label: { Text("🔀") }).shadow(radius: 2, y: 3).padding(5)
                 }
                 Divider()
@@ -93,20 +94,14 @@ struct SmartHomeView: View {
                     
                 case true:
                    
-                    let devicesListCount = smartDevices.count
+                    GridView(smartDevices: $smartDevices)
                     
-                    ForEach(Array(stride(from: 0, to: devicesListCount, by: 1)), id: \.self) { device in
-                        
-                        Grid{
-                            Image(systemName: "power.circle.fill").font(.title)
-                            Text(smartDevices[Int(device.description)!].name)
-                        }.frame(width: 150, height: 80).clipShape(Rectangle()).background(.blue).foregroundColor(.white).cornerRadius(15)
-                    }
+                    
                 }
                     
                 Divider()
                 
-                Text("Neues Lichtgerät anlegen!")
+                Text("Neues Gerät anlegen!")
                     .font(.title2)
                     .foregroundColor(.green).bold()
                 HStack {
@@ -123,7 +118,7 @@ struct SmartHomeView: View {
                             texteingabe = "keine Texteingabe!"
                         } else {
                             texteingabe = text
-                            hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: .light, isOn: true, temperature: 0.0, isLocket: false))
+                            hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: .light, isOn: true, temperature: 0, isLocket: false))
                         }
                         
                     }, label: {
