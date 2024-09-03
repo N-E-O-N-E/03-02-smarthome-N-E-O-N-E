@@ -15,7 +15,11 @@ struct SmartHomeView: View {
     @State private var smartDevices = [
         SmartDevice(id: UUID(), name: "Wohnzimmerlicht", type: .light, isOn: false, temperature: 0.0, isLocket: false),
         SmartDevice(id: UUID(), name: "Heizung", type: .thermostat, isOn: true, temperature: 20.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Haustür", type: .lock, isOn: false, temperature: 0.0, isLocket: true)
+        SmartDevice(id: UUID(), name: "Haustür", type: .lock, isOn: false, temperature: 0.0, isLocket: true),
+        SmartDevice(id: UUID(), name: "Küchenlicht", type: .light, isOn: false, temperature: 0.0, isLocket: true),
+        SmartDevice(id: UUID(), name: "Gartentür", type: .lock, isOn: false, temperature: 0.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Kellerraum", type: .thermostat, isOn: false, temperature: 18.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Toilettentür", type: .lock, isOn: false, temperature: 0.0, isLocket: true)
     ]
     @State private var gridAnsicht: Bool = true
     
@@ -41,8 +45,17 @@ struct SmartHomeView: View {
                     .padding()
                 
                 Divider()
+                
                 HStack {
                     Text("Gereäteliste Layout").padding(2)
+                    
+//                    Picker(selection: .constant(2), label: Text("Picker")) {
+//                        Text("Licht").tag(1)
+//                        Text("Thermostat").tag(2)
+//                        Text("Schloss").tag(3)
+//                        
+//                    }
+                    
                     Button(action: {
                         //SWITCH GRID
                         gridAnsicht.toggle()
@@ -79,30 +92,16 @@ struct SmartHomeView: View {
                     }.padding()
                     
                 case true:
+                   
                     let devicesListCount = smartDevices.count
-                    Grid {
-                        GridRow {
-                            Image(systemName: "power.circle.fill").font(.largeTitle)
-                            Image(systemName: "circle.badge.questionmark").font(.largeTitle)
-                        }
-                        Divider()
-                        
-                        GridRow {
-                            Grid {
-                                ForEach(Array(stride(from: 0, to: devicesListCount, by: 1)), id: \.self) { device in
-                                    let num = Int(device.description)
-                                    Text(smartDevices[num!].name)
-                                }
-                            }
-                            Grid {
-                                ForEach(Array(stride(from: 0, to: devicesListCount, by: 1)), id: \.self) { device in
-                                    let num = Int(device.description)
-                                    Text(smartDevices[num!].type.description)
-                                }
-                            }
-                        }
-                    }
                     
+                    ForEach(Array(stride(from: 0, to: devicesListCount, by: 1)), id: \.self) { device in
+                        
+                        Grid{
+                            Image(systemName: "power.circle.fill").font(.title)
+                            Text(smartDevices[Int(device.description)!].name)
+                        }.frame(width: 150, height: 80).clipShape(Rectangle()).background(.blue).foregroundColor(.white).cornerRadius(15)
+                    }
                 }
                     
                 Divider()
