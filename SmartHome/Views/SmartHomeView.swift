@@ -47,7 +47,9 @@ struct SmartHomeView: View {
                 Divider()
                 
                 HStack {
-                    Text("Gereäteliste Layout").padding(2)
+                    Text("Gerätedetails anzeigen")
+                        .foregroundStyle(.blue)
+                        .padding(2)
                     
 //                    Picker(selection: .constant(2), label: Text("Picker")) {
 //                        Text("Licht").tag(1)
@@ -94,7 +96,9 @@ struct SmartHomeView: View {
                     
                 case true:
                    
+                    
                     GridView(smartDevices: $smartDevices)
+                        
                     
                     
                 }
@@ -103,7 +107,7 @@ struct SmartHomeView: View {
                 
                 Text("Neues Gerät anlegen!")
                     .font(.title2)
-                    .foregroundColor(.green).bold()
+                    .foregroundColor(.black).bold()
                 HStack {
                     
                     

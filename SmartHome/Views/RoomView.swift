@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct RoomView: View {
+
+    @State private var raster4View: [GridItem] = []
     @Binding var anzeigen: Bool
-    
+    var rasterSize = (330, 250)
+
     var body: some View {
         
         if anzeigen {
@@ -18,13 +21,37 @@ struct RoomView: View {
                 
                Image("haus")
                     .resizable()
-                    .frame(width: 330, height: 250)
+                    .frame(width: CGFloat(rasterSize.0), height: CGFloat(rasterSize.1))
                     .cornerRadius(20)
                     .scaledToFit().aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                     .padding(20)
-                 
+
+                
+                LazyVGrid(columns: raster4View, spacing: 11) {
+                    
+                    let raster = rasterSize.0 * rasterSize.1 / 10000 * 8
+                    
+                    ForEach(0..<raster, id: \.self) { index in
+                        
+                        
+                        Button(action: {
+                            // tu was
+                        }, label: {
+                            Image(systemName: "circle").opacity(0.2)
+                        })
+                        
+                        
+                    }
+
+                }
+                .frame(width: CGFloat(rasterSize.0), height: CGFloat(rasterSize.1))
+                .border(.red)
+                    .onAppear {
+                        Raster()
+                    }
                 
                 
+                      
                 
                 VStack() {
                     HStack {
@@ -54,7 +81,22 @@ struct RoomView: View {
         }
         
     }
+    
+    func Raster() {
+        let raster4Grid = (rasterSize.0 * rasterSize.1) / 10000
+        print("Mögliche Rasterbreite: \(raster4Grid)")
+        let gridItemElement = GridItem()
+        
+        if raster4View.isEmpty {
+            for _ in 0..<raster4Grid {
+                raster4View.append(gridItemElement)
+            }
+        }
+    }
+ 
 }
+
+
 
 #Preview {
     @State var x = true
