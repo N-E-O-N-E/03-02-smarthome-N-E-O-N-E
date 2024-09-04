@@ -12,10 +12,11 @@ struct SmartHomeView: View {
     @State private var texteingabe: String = ""
     @State private var text: String = ""
     @State private var anzeigen = false
-    @State private var smartDevices = [
-        SmartDevice(id: UUID(), name: "Wohnzimmer-Licht", type: .light, isOn: true, temperature: 0.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Wohnzimmer-Heizung", type: .thermostat, isOn: true, temperature: 16.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Wohzimmer-Tür", type: .lock, isOn: false, temperature: 0.0, isLocket: false)
+    @State var smartDevices = [
+        SmartDevice(id: UUID(), name: "Steckdose_1", type: .energie, isOn: false, isEnergie: true, temperature: 0.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 16.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Tür_1", type: .schloss, isOn: false, isEnergie: false, temperature: 0.0, isLocked: true)
     ]
     @State private var gridAnsicht: Bool = true
     @State private var selectedDeviceType: DeviceType = .light
@@ -121,7 +122,7 @@ struct SmartHomeView: View {
                             texteingabe = "keine Texteingabe!"
                         } else {
                             texteingabe = text
-                            hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: selectedDeviceType, isOn: true, temperature: 0, isLocket: false))
+                            hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: selectedDeviceType, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false))
                         }
                         
                     }, label: {
@@ -141,7 +142,8 @@ struct SmartHomeView: View {
                 Divider()
                 
                 RoomView(anzeigen: $anzeigen)
-                    .padding()
+                //RoomViewRaster(anzeigen: $anzeigen)
+                   
                 
                 Divider()
                 

@@ -17,15 +17,17 @@ enum DeviceType: String, CustomStringConvertible, Identifiable, CaseIterable {
         switch self {
         case .light:
             return "Licht"
+        case .energie:
+            return "Strom"
+        case .schloss:
+            return "Tür"
         case .thermostat:
-            return "Thermostat"
-        case .lock:
-            return "Schloss"
+            return "Temperatur"
 
         }
     }
     
-    case light, thermostat, lock
+    case light, thermostat, energie, schloss
 }
 
 

@@ -33,15 +33,15 @@ struct GridView: View {
                                 Spacer()
                                 Toggle(isOn: $smartDevices[device.self].isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
                                 
-                            } else if smartDevices[device.self].type == .lock {
-                                Image(systemName: "lock.square.fill").font(.title)
+                            } else if smartDevices[device.self].type == .energie {
+                                Image(systemName: "bolt.circle.fill").font(.title)
                                 Spacer()
-                                Toggle(isOn: $smartDevices[device.self].isLocket, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
+                                Toggle(isOn: $smartDevices[device.self].isEnergie, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
                                 
                             } else if smartDevices[device.self].type == .thermostat {
                                 Image(systemName: "thermometer.transmission").font(.title)
                                 Spacer()
-                               
+
                                 HStack(alignment:.bottom) {
                                         Slider(value: $smartDevices[device.self].temperature, in: 0...40)
                                             .padding(1).scaleEffect(CGSize(width: 0.8, height: 0.8))
@@ -51,8 +51,10 @@ struct GridView: View {
                                             Toggle(isOn: $smartDevices[device.self].isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.5, height: 0.5))
                                         }
                                     }
-                                    
-                                
+                            } else if smartDevices[device.self].type == .schloss {
+                                Image(systemName: "lock.square.fill").font(.title)
+                                Spacer()
+                                Toggle(isOn: $smartDevices[device.self].isLocked, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
                                 
                             }
                             
@@ -77,9 +79,10 @@ struct GridView: View {
 
 #Preview {
     @State var testDevice = [
-        SmartDevice(id: UUID(), name: "Wohnzimmer-Licht", type: .light, isOn: false, temperature: 0.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Wohnzimmer-Heizung", type: .thermostat, isOn: true, temperature: 16.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Wohzimmer-Tür", type: .lock, isOn: false, temperature: 0.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Steckdose_1", type: .energie, isOn: false, isEnergie: true, temperature: 0.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 16.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Tür_1", type: .schloss, isOn: false, isEnergie: false, temperature: 0.0, isLocked: true)
     ]
     return GridView(smartDevices: $testDevice)
 }
