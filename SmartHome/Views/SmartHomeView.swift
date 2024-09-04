@@ -13,15 +13,12 @@ struct SmartHomeView: View {
     @State private var text: String = ""
     @State private var anzeigen = false
     @State private var smartDevices = [
-        SmartDevice(id: UUID(), name: "Wohnzimmerlicht", type: .light, isOn: false, temperature: 0.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Heizung", type: .thermostat, isOn: true, temperature: 26.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Haustür", type: .lock, isOn: false, temperature: 0.0, isLocket: true),
-        SmartDevice(id: UUID(), name: "Küchenlicht", type: .light, isOn: false, temperature: 0.0, isLocket: true),
-        SmartDevice(id: UUID(), name: "Gartentür", type: .lock, isOn: false, temperature: 0.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Kellerraum", type: .thermostat, isOn: false, temperature: 12.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Toilettentür", type: .lock, isOn: false, temperature: 0.0, isLocket: true)
+        SmartDevice(id: UUID(), name: "Wohnzimmer-Licht", type: .light, isOn: true, temperature: 0.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Wohnzimmer-Heizung", type: .thermostat, isOn: true, temperature: 16.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Wohzimmer-Tür", type: .lock, isOn: false, temperature: 0.0, isLocket: false)
     ]
     @State private var gridAnsicht: Bool = true
+    @State private var selectedDeviceType: DeviceType = .light
     
     func hinzu(element: SmartDevice) {
         smartDevices.append(element)
@@ -50,13 +47,6 @@ struct SmartHomeView: View {
                     Text("Gerätedetails anzeigen")
                         .foregroundStyle(.blue)
                         .padding(2)
-                    
-//                    Picker(selection: .constant(2), label: Text("Picker")) {
-//                        Text("Licht").tag(1)
-//                        Text("Thermostat").tag(2)
-//                        Text("Schloss").tag(3)
-//                        
-//                    }
                     
                     Button(action: {
 
@@ -105,9 +95,18 @@ struct SmartHomeView: View {
                     
                 Divider()
                 
-                Text("Neues Gerät anlegen!")
-                    .font(.title2)
-                    .foregroundColor(.black).bold()
+                
+                    Text("Neues Gerät anlegen!")
+                        .font(.title2)
+                        .foregroundColor(.black).bold()
+                    
+                    Picker("Gerätepicker", selection: $selectedDeviceType) {
+                        ForEach(DeviceType.allCases) { item in
+                            Text(item.description).tag(item)
+                        }
+                    }.pickerStyle(.palette).frame(width: 300,height: 20).padding(1)
+                
+                
                 HStack {
                     
                     
@@ -122,7 +121,7 @@ struct SmartHomeView: View {
                             texteingabe = "keine Texteingabe!"
                         } else {
                             texteingabe = text
-                            hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: .light, isOn: true, temperature: 0, isLocket: false))
+                            hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: selectedDeviceType, isOn: true, temperature: 0, isLocket: false))
                         }
                         
                     }, label: {

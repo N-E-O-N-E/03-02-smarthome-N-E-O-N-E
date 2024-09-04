@@ -8,7 +8,10 @@
 import Foundation
 
 
-enum DeviceType: CustomStringConvertible {
+enum DeviceType: String, CustomStringConvertible, Identifiable, CaseIterable {
+    
+    var id: String {rawValue}
+    
     var description: String {
         
         switch self {

@@ -24,7 +24,7 @@ struct GridView: View {
                 Grid(alignment: .leading){
                     VStack {
                         Text(smartDevices[device.self].name)
-                            .frame(width: 150).bold()
+                            .frame(width: 140).font(.caption)
                         
                         HStack {
                             
@@ -41,18 +41,25 @@ struct GridView: View {
                             } else if smartDevices[device.self].type == .thermostat {
                                 Image(systemName: "thermometer.transmission").font(.title)
                                 Spacer()
-                                HStack {
-                                    Slider(value: $smartDevices[device.self].temperature, in: 0...40)
-                                        .padding(1).scaleEffect(CGSize(width: 0.8, height: 0.8))
-                                    Text("\(Int(smartDevices[device.self].temperature))°C")
-                                        .font(.footnote)
-                                }
+                               
+                                HStack(alignment:.bottom) {
+                                        Slider(value: $smartDevices[device.self].temperature, in: 0...40)
+                                            .padding(1).scaleEffect(CGSize(width: 0.8, height: 0.8))
+                                        VStack{
+                                            Text("\(Int(smartDevices[device.self].temperature))°C")
+                                                .font(.footnote)
+                                            Toggle(isOn: $smartDevices[device.self].isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.5, height: 0.5))
+                                        }
+                                    }
+                                    
+                                
+                                
                             }
                             
-                        }.frame(width: 160, height: 40)
+                        }.frame(width: 160, height: 60)
                     }
                 }
-                .frame(width: 180, height: 90)
+                .frame(width: 180, height: 110)
                 .clipShape(Rectangle())
                 .background(Color(hue: 0.6, saturation: 0.2, brightness: 1.0))
                 .foregroundColor(.black)
@@ -70,13 +77,9 @@ struct GridView: View {
 
 #Preview {
     @State var testDevice = [
-        SmartDevice(id: UUID(), name: "Wohnzimmerlicht", type: .light, isOn: false, temperature: 0.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Heizung", type: .thermostat, isOn: true, temperature: 26.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Haustür", type: .lock, isOn: false, temperature: 0.0, isLocket: true),
-        SmartDevice(id: UUID(), name: "Küchenlicht", type: .light, isOn: false, temperature: 0.0, isLocket: true),
-        SmartDevice(id: UUID(), name: "Gartentür", type: .lock, isOn: false, temperature: 0.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Kellerraum", type: .thermostat, isOn: false, temperature: 12.0, isLocket: false),
-        SmartDevice(id: UUID(), name: "Toilettentür", type: .lock, isOn: false, temperature: 0.0, isLocket: true)
+        SmartDevice(id: UUID(), name: "Wohnzimmer-Licht", type: .light, isOn: false, temperature: 0.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Wohnzimmer-Heizung", type: .thermostat, isOn: true, temperature: 16.0, isLocket: false),
+        SmartDevice(id: UUID(), name: "Wohzimmer-Tür", type: .lock, isOn: false, temperature: 0.0, isLocket: false),
     ]
     return GridView(smartDevices: $testDevice)
 }
