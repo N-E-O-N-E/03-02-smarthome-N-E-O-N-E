@@ -14,10 +14,14 @@ struct SmartHomeView: View {
     @State private var anzeigen = false
     @State var smartDevices = [
         SmartDevice(id: UUID(), name: "Steckdose_1", type: .energie, isOn: false, isEnergie: true, temperature: 0.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Steckdose_2", type: .energie, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
         SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
-        SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 16.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Licht_2", type: .light, isOn: true, isEnergie: false, temperature: 0.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 20.0, isLocked: false),
+        SmartDevice(id: UUID(), name: "Klimagerät_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 18.0, isLocked: false),
         SmartDevice(id: UUID(), name: "Tür_1", type: .schloss, isOn: false, isEnergie: false, temperature: 0.0, isLocked: true)
     ]
+    
     @State private var gridAnsicht: Bool = true
     @State private var selectedDeviceType: DeviceType = .light
     
@@ -141,7 +145,7 @@ struct SmartHomeView: View {
                 TextView(texteingabe: $texteingabe)
                 Divider()
                 
-                RoomView(anzeigen: $anzeigen)
+                RoomView(anzeigen: $anzeigen, geraete: $smartDevices)
                 //RoomViewRaster(anzeigen: $anzeigen)
                    
                 

@@ -9,11 +9,7 @@ import SwiftUI
 
 struct RoomView: View {
     @Binding var anzeigen: Bool
-    var geraete = [SmartDevice(id: UUID(), name: "Steckdose_1", type: .energie, isOn: false, isEnergie: true, temperature: 0.0, isLocked: false),
-                   SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
-                   SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 16.0, isLocked: false),
-                   SmartDevice(id: UUID(), name: "Tür_1", type: .schloss, isOn: false, isEnergie: false, temperature: 0.0, isLocked: true)
-    ]
+    @Binding var geraete: [SmartDevice]
     
     var body: some View {
         
@@ -47,44 +43,91 @@ struct RoomView: View {
                         Spacer()
                         
                         HStack{
-                            
                             ForEach(geraete, id: \.id) { pos in
-                                
-                                if pos.type == .light && pos.isOn {
+                                if pos.type == .light && pos.isOn == true {
                                     Image(systemName: "lightbulb.min.fill")
-                                        .font(.system(size: 40))
-                                        .foregroundColor(.yellow).shadow(radius: 5)
+                                        .font(.system(size: 30))
+                                        .foregroundColor(pos.isOn ? .yellow : .gray)
+                                        .shadow(radius: 5)
                                         .padding(1)
-                                } else {
-                                    Image(systemName: "lightbulb.min.fill")
-                                        .font(.system(size: 40))
-                                        .foregroundColor(.yellow).shadow(radius: 5)
+                                } else if pos.type == .light && pos.isOn == false {
+                                    Image(systemName: "lightbulb.fill")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(pos.isOn ? .yellow : .gray)
+                                        .shadow(radius: 5)
                                         .padding(1)
                                 }
-                                
                             }
-                            
-                            
                         }
                         HStack{
-                            
-                            Image(systemName: "thermometer.transmission")
-                                .font(.system(size: 40))
-                                .foregroundColor(.orange).shadow(radius: 5)
-                                .padding(1)
-                               
+                            ForEach(geraete, id: \.id) { pos in
+                                if pos.type == .thermostat && pos.temperature <= 18 {
+                                    VStack {
+                                        Image(systemName: "thermometer.transmission")
+                                            .font(.system(size: 30))
+                                            .foregroundColor(pos.isOn ? .blue : .gray)
+                                            .shadow(radius: 5)
+                                            .padding(1)
+                                        
+                                        Text("\(Int(pos.temperature))°C")
+                                            .font(.footnote).foregroundColor(.white)
+                                    }
+                                } else if pos.type == .thermostat && pos.temperature > 18 && pos.temperature <= 25 {
+                                    VStack {
+                                        Image(systemName: "thermometer.transmission")
+                                            .font(.system(size: 30))
+                                            .foregroundColor(pos.isOn ? .orange : .gray)
+                                            .shadow(radius: 5)
+                                            .padding(1)
+                                        
+                                        Text("\(Int(pos.temperature))°C")
+                                            .font(.footnote).foregroundColor(.white)
+                                    }
+                                } else if pos.type == .thermostat && pos.temperature > 25 {
+                                    VStack {
+                                        Image(systemName: "thermometer.transmission")
+                                            .font(.system(size: 30))
+                                            .foregroundColor(pos.isOn ? .red : .gray)
+                                            .shadow(radius: 5)
+                                            .padding(1)
+                                        
+                                        Text("\(Int(pos.temperature))°C")
+                                            .font(.footnote).foregroundColor(.white)
+                                    }
+                                }
+                            }
                         }
                         HStack{
-                            
-                            Image(systemName: "bolt.circle.fill")
-                                .font(.system(size: 40))
-                                .foregroundColor(.red).shadow(radius: 5)
-                                .padding(1)
-
+                            ForEach(geraete, id: \.id) { pos in
+                                if pos.type == .schloss && pos.isLocked == true {
+                                    Image(systemName: "door.left.hand.closed")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(pos.isLocked ? .yellow : .gray)
+                                        .shadow(radius: 5)
+                                        .padding(1)
+                                } else if pos.type == .schloss && pos.isLocked == false {
+                                    Image(systemName: "door.left.hand.open")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(pos.isLocked ? .yellow : .gray)
+                                        .shadow(radius: 5)
+                                        .padding(1)
+                                }
+                            }
                         }
+                        HStack{
+                            ForEach(geraete, id: \.id) { pos in
+                                if pos.type == .energie{
+                                    Image(systemName: "bolt.circle.fill")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(pos.isEnergie ? .yellow : .gray)
+                                        .shadow(radius: 5)
+                                        .padding(1)
+                                }
+                            }
+                        }
+                        
+                        
                         Spacer()
-                        
-                        
                     }.frame(width: 300, height: 230)
                     
 
@@ -100,12 +143,11 @@ struct RoomView: View {
 
 #Preview {
     @State var x = true
-    return RoomView(anzeigen: $x, geraete: [
-        SmartDevice(id: UUID(), name: "Steckdose_1", type: .energie, isOn: false, isEnergie: true, temperature: 0.0, isLocked: false),
-        SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
-        SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 16.0, isLocked: false),
-        SmartDevice(id: UUID(), name: "Tür_1", type: .schloss, isOn: false, isEnergie: false, temperature: 0.0, isLocked: true)
-    ])
+    @State var test = [SmartDevice(id: UUID(), name: "Steckdose_1", type: .energie, isOn: false, isEnergie: true, temperature: 0.0, isLocked: false),
+                       SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
+                       SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 16.0, isLocked: false),
+                       SmartDevice(id: UUID(), name: "Tür_1", type: .schloss, isOn: false, isEnergie: false, temperature: 0.0, isLocked: true)]
+    return RoomView(anzeigen: $x, geraete: $test)
 }
 
 

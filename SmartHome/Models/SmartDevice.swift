@@ -18,7 +18,7 @@ struct SmartDevice: Identifiable {
     
     var isOn: Bool {
         didSet {
-            print("Licht wurde verändert!")
+            print("Status wurde verändert!")
         }
     }
     
