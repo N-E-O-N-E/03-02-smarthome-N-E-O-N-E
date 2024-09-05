@@ -44,8 +44,12 @@ struct geraetAnlegen: View {
             if text == "" {
                 texteingabe = "keine Texteingabe!"
             } else {
-                texteingabe = text
-                hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: selectedDeviceType, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false))
+                if smartDevices.count < 8 {
+                    texteingabe = text
+                    hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: selectedDeviceType, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false))
+                } else {
+                    texteingabe = "Keine weiteren Elemente möglich!"
+                }
             }
             
         }, label: {

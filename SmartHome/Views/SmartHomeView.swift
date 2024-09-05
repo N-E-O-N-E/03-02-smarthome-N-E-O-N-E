@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct SmartHomeView: View {
     @State private var texteingabe: String = ""
     @State private var text: String = ""
@@ -24,8 +23,6 @@ struct SmartHomeView: View {
     @State private var gridAnsicht: Bool = true
     @State private var selectedDeviceType: DeviceType = .light
     
-   
-    
     var body: some View {
         
         ScrollView {
@@ -35,9 +32,9 @@ struct SmartHomeView: View {
                 roomViewButton(anzeige: $anzeigen)
                 RoomView(anzeigen: $anzeigen, geraete: $smartDevices)
                 geraetInfoList(grid: $gridAnsicht, devices: $smartDevices)
-                geraetAnlegen(selectedDeviceType: $selectedDeviceType, text: $text, 
+                geraetAnlegen(selectedDeviceType: $selectedDeviceType, text: $text,
                               texteingabe: $texteingabe, smartDevices: $smartDevices)
-
+                
                 Spacer()
             }
         }
@@ -47,5 +44,3 @@ struct SmartHomeView: View {
 #Preview {
     SmartHomeView()
 }
-
-

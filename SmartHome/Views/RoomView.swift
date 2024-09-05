@@ -12,7 +12,11 @@ struct RoomView: View {
     @Binding var geraete: [SmartDevice]
     let spalten = [GridItem(.fixed(50)), GridItem(.fixed(50))]
     let gradient = Gradient(colors: [.blue, .yellow, .orange, .red])
-    @State private var calcGauge = 23.6
+    @State private var calcGauge = 23.6 {
+        didSet {
+            print("Raumtemperatur wurde geändert.")
+        }
+    }
     
     var body: some View {
         
@@ -166,8 +170,8 @@ struct RoomView: View {
                                 Text(pos.name).font(.system(size: 6)).foregroundStyle(.white)
                                 
                             } .frame(width: 40, height: 40, alignment: .center) // Icons
-                                //.offset(CGSize(width: -45.0, height: -10.0))
-                                .padding(0)
+                                .offset(CGSize(width: 0.0, height: -10.0))
+                                .padding(2)
                         }
                     }.frame(width: 210, height: 200, alignment: .topLeading) //LazyGrid
                   
@@ -190,9 +194,12 @@ struct RoomView: View {
     @State var x = true
     @State var test = [SmartDevice(id: UUID(), name: "Steckdose_1", type: .energie, isOn: false, isEnergie: true, temperature: 0.0, isLocked: false),
                        SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
-                       
+                       SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
+                       SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
+                       SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
+                       SmartDevice(id: UUID(), name: "Licht_1", type: .light, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false),
                        SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 16.0, isLocked: false),
-                       SmartDevice(id: UUID(), name: "Tür_1", type: .schloss, isOn: false, isEnergie: false, temperature: 0.0, isLocked: true)]
+                       SmartDevice(id: UUID(), name: "Heizung_1", type: .thermostat, isOn: true, isEnergie: false, temperature: 16.0, isLocked: false)]
     return RoomView(anzeigen: $x, geraete: $test)
 }
 
