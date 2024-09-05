@@ -25,9 +25,8 @@ struct RoomView: View {
                     .frame(width: 330, height: 250)
                     .border(.white)
                     .cornerRadius(20)
-                    .scaledToFit().aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                    .scaledToFit().aspectRatio(contentMode: .fill)
                     .padding(20)
-                
                 
                 
                 Gauge(value: calcGauge, in: 0...50) {
@@ -180,7 +179,7 @@ struct RoomView: View {
                 .frame(width: 300)
             
         } else {
-            Text("Raumvorschau deaktiviert!")
+            Text("")
                 .font(.callout)
                 .foregroundColor(.red)
         }
