@@ -29,7 +29,6 @@ struct SmartHomeView: View {
         smartDevices.append(element)
     }
     
-    
     var body: some View {
         ScrollView {
             
