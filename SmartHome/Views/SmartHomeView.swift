@@ -48,6 +48,22 @@ struct SmartHomeView: View {
                 Divider()
                 
                 HStack {
+                    
+                    Image("haus").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
+                        .blur(radius: 4).cornerRadius(10)
+                    Toggle(isOn: $anzeigen, label: {
+                        Text("Raumvorschau anzeigen")
+                    }) .padding().labelsHidden()
+                    Image("haus").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
+                        .cornerRadius(10)
+                }
+                
+               
+                
+                RoomView(anzeigen: $anzeigen, geraete: $smartDevices)
+                Divider()
+                
+                HStack {
                     Text("Gerätedetails anzeigen")
                         .foregroundStyle(.blue)
                         .padding(2)
@@ -142,26 +158,11 @@ struct SmartHomeView: View {
                 
                 // Text(texteingabe)
                 TextView(texteingabe: $texteingabe)
-                Divider()
+               
                 
-                RoomView(anzeigen: $anzeigen, geraete: $smartDevices)
-                //RoomViewRaster(anzeigen: $anzeigen)
-                   
                 
-                Divider()
                 
-                HStack {
-                    
-                    Image("haus").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
-                        .blur(radius: 4).cornerRadius(10)
-                    Toggle(isOn: $anzeigen, label: {
-                        Text("Raumvorschau anzeigen")
-                    }) .padding().labelsHidden()
-                    Image("haus").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
-                        .cornerRadius(10)
-                }
                 
-                Divider()
                 Spacer()
                 
             }

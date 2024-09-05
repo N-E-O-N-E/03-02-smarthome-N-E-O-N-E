@@ -20,21 +20,21 @@ struct GridView: View {
     }
     
     var body: some View {
-    
-        let listCount = Int(smartDevices.count)
+        
         
         ZStack {
-            LazyVGrid(columns: spalten, spacing: 10) {
+            LazyVGrid(columns: spalten, spacing: 15) {
                 
-                ForEach(Array(stride(from: 0, to: listCount , by: 1)), id: \.self) { device in
+               // ForEach(Array(stride(from: 0, to: listCount , by: 1)), id: \.self) { device in
+                ForEach($smartDevices, id: \.id) { $device in
                     
                     Grid(alignment: .leading){
                         
                         VStack {
-                            Spacer()
+                            
                             Button(action: {
                                 
-                                entf(element: smartDevices[device.self])
+                                entf(element: device)
                                 
                             }, label: {
                                 Text("x")
@@ -44,56 +44,100 @@ struct GridView: View {
                             .padding(3)
                             .background(Color(.white))
                             .clipShape(.circle)
-                        }.padding(.horizontal,0)
+                        }
+                        .padding(.horizontal,0)
                         
                         VStack {
-                            Text(smartDevices[device.self].name)
-                                .frame(width: 140).font(.caption)
-                            
+                            Text(device.name)
+                                .frame(width: 140).font(.caption).bold()
+                            Spacer()
                             HStack {
                                 
-                                if smartDevices[device.self].type == .light  {
-                                    Image(systemName: "lightbulb.min.badge.exclamationmark.fill").font(.title)
+                                if device.type == .light{
+                                    Image(systemName: "lightbulb.fill").font(.title)
+                                        .foregroundColor(device.isOn ? .green : .gray)
                                     Spacer()
-                                    Toggle(isOn: $smartDevices[device.self].isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
+                                    Toggle(isOn: $device.isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
+
                                     
-                                    
-                                } else if smartDevices[device.self].type == .energie {
+                                } else if device.type == .energie {
                                     Image(systemName: "bolt.circle.fill").font(.title)
+                                        .foregroundColor(device.isEnergie ? .green : .gray)
                                     Spacer()
-                                    Toggle(isOn: $smartDevices[device.self].isEnergie, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
+                                    Toggle(isOn: $device.isEnergie, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
                                     
-                                } else if smartDevices[device.self].type == .thermostat {
+                                    
+                                    
+                                    
+                                } else if device.type == .thermostat && device.temperature <= 18 {
                                     Image(systemName: "thermometer.transmission").font(.title)
+                                        .foregroundColor(device.isOn ? .blue : .gray)
                                     Spacer()
                                     
                                     HStack(alignment:.bottom) {
-                                        Slider(value: $smartDevices[device.self].temperature, in: 0...40)
+                                        Slider(value: $device.temperature, in: 0...40)
                                             .padding(1).scaleEffect(CGSize(width: 0.8, height: 0.8))
                                         VStack{
-                                            Text("\(Int(smartDevices[device.self].temperature))°C")
-                                                .font(.footnote)
-                                            Toggle(isOn: $smartDevices[device.self].isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.5, height: 0.5))
+                                            Text("\(Int(device.temperature))°C")
+                                                .font(.caption2)
+                                            Toggle(isOn: $device.isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.5, height: 0.5))
                                         }
                                     }
-                                } else if smartDevices[device.self].type == .schloss {
+                                } else if device.type == .thermostat && device.temperature > 18 && device.temperature <= 25 {
+                                        Image(systemName: "thermometer.transmission").font(.title)
+                                            .foregroundColor(device.isOn ? .orange : .gray)
+                                        Spacer()
+                                        
+                                        HStack(alignment:.bottom) {
+                                            Slider(value: $device.temperature, in: 0...40)
+                                                .padding(1).scaleEffect(CGSize(width: 0.8, height: 0.8))
+                                            VStack{
+                                                Text("\(Int(device.temperature))°C")
+                                                    .font(.caption2)
+                                                Toggle(isOn: $device.isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.5, height: 0.5))
+                                            }
+                                        }
+                                } else if device.type == .thermostat && device.temperature > 25 {
+                                        Image(systemName: "thermometer.transmission").font(.title)
+                                            .foregroundColor(device.isOn ? .red : .gray)
+                                        Spacer()
+                                        
+                                        HStack(alignment:.bottom) {
+                                            Slider(value: $device.temperature, in: 0...40)
+                                                .padding(1).scaleEffect(CGSize(width: 0.8, height: 0.8))
+                                            VStack{
+                                                Text("\(Int(device.temperature))°C")
+                                                    .font(.caption2)
+                                                Toggle(isOn: $device.isOn, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.5, height: 0.5))
+                                            }
+                                        }
+                                    
+
+
+                                } else if device.type == .schloss {
                                     Image(systemName: "lock.square.fill").font(.title)
+                                        .foregroundColor(device.isLocked ? .green : .gray)
                                     Spacer()
-                                    Toggle(isOn: $smartDevices[device.self].isLocked, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
+                                    Toggle(isOn: $device.isLocked, label: {}).labelsHidden().scaleEffect(CGSize(width: 0.7, height: 0.7))
                                     
                                 }
+          
                                 
-                            }.frame(width: 160, height: 60)
+                            }
+                            
+                        }.frame(width: 160, height: 70)
+                            
+                           
                         }
                     }
                     .frame(width: 180, height: 110)
                     .clipShape(Rectangle())
-                    .background(Color(hue: 0.6, saturation: 0.2, brightness: 1.0))
-                    .foregroundColor(.black)
+                    .background(Color(hue: 0.7, saturation: 0.05, brightness: 0.3))
+                    .foregroundColor(.white)
+                    .cornerRadius(9)
+                
                     
-                    .cornerRadius(10)
-                    
-                }
+               // }
                 
             }.padding(10)
                 .shadow(radius: 3, y: 3)
