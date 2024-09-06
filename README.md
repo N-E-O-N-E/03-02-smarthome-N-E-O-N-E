@@ -1,6 +1,5 @@
 ## Übungsaufgabe - SmartHome Screen
 
-![Bildschirmfoto 2024-09-05 um 15 41 33](https://github.com/user-attachments/assets/2c247583-f689-45d6-86e8-4c8e3d3a6e5d)
-![Bildschirmfoto 2024-09-05 um 15 41 44](https://github.com/user-attachments/assets/cdfe6e1d-8826-44d6-9dac-9a0b6e38d949)
 
-
+![Bildschirmfoto 2024-09-06 um 15 44 28](https://github.com/user-attachments/assets/a02719bb-8696-4da6-a88c-ff31a974b3bc)
+![Bildschirmfoto 2024-09-06 um 15 44 45](https://github.com/user-attachments/assets/e7d5a4c2-8280-4117-b76e-11279421ffbd)
