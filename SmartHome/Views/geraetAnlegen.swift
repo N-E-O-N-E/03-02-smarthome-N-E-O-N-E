@@ -63,9 +63,8 @@ struct geraetAnlegen: View {
         .shadow(radius: 5, y: 3)
         
     }.padding()
-    
-    // Text(texteingabe)
-    TextView(texteingabe: $texteingabe)
+        
+    Text(texteingabe)
    
     }
 }
