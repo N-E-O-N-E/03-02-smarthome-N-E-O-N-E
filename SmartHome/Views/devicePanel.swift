@@ -32,7 +32,7 @@ struct devicePanel: View {
             
             VStack {
                 Text(device.name)
-                    .frame(width: .infinity).font(.callout)
+                    .frame(width: 100, height: .infinity).font(.callout)
                 
                 Spacer()
                 
