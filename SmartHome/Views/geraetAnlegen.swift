@@ -18,53 +18,69 @@ struct geraetAnlegen: View {
     }
     
     var body: some View {
-        
-        
-        Text("Neues Gerät anlegen!")
-            .font(.title2)
-            .foregroundColor(.black).bold()
-        
-        Picker("Gerätepicker", selection: $selectedDeviceType) {
-            ForEach(DeviceType.allCases) { item in
-                Text(item.description).tag(item)
-            }
-        }.pickerStyle(.palette).frame(width: 300,height: 20).padding(1)
-    
-    
-    HStack {
-        
-        
-        TextField("Hier Text eingeben...", text: $text)
-            .border(Color.gray)
-            .font(.title2)
-            .padding()
-        
-        Button(action: {
+        VStack(alignment:.center) {
             
-            if text == "" {
-                texteingabe = "keine Texteingabe!"
-            } else {
-                if smartDevices.count < 8 {
-                    texteingabe = text
-                    hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: selectedDeviceType, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false))
-                } else {
-                    texteingabe = "Keine weiteren Elemente möglich!"
+            Text("Neues Gerät anlegen!")
+                .font(.title2)
+                .foregroundColor(.black).bold()
+            
+            Picker("Gerätepicker", selection: $selectedDeviceType) {
+                ForEach(DeviceType.allCases) { item in
+                    Text(item.description).tag(item)
                 }
-            }
+            }.pickerStyle(.palette).frame(width: 300,height: 20).padding(1)
             
-        }, label: {
-            Text("💡")
-                .font(.title)
-        })
-        .padding(8)
-        . background(.green)
-        .foregroundColor(.white)
-        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-        .shadow(radius: 5, y: 3)
-        
-    }.padding()
-        
-    Text(texteingabe)
-   
+            
+            HStack(alignment:.center) {
+                
+                
+                TextField("Hier Text eingeben...", text: $text)
+                    .border(Color.gray)
+                    .font(.title2)
+                    .padding(5)
+                
+               
+                
+                Button(action: {
+                    
+                    if text == "" {
+                        texteingabe = "keine Texteingabe!"
+                    } else {
+                        if smartDevices.count < 8 {
+                            texteingabe = text
+                            hinzu(element: SmartDevice(id: UUID(), name: texteingabe, type: selectedDeviceType, isOn: false, isEnergie: false, temperature: 0.0, isLocked: false))
+                        } else {
+                            texteingabe = "Keine weiteren Elemente möglich!"
+                        }
+                    }
+                    
+                }, label: {
+                    Text("＋")
+                        .font(.title)
+                })
+                .padding(5)
+                .background(.green)
+                .foregroundColor(.white)
+                .clipShape(.rect(cornerRadius: 9))
+                .shadow(radius: 3, y: 3)
+                
+                Spacer()
+                
+            }.padding()
+            
+            Text(texteingabe)
+            
+        }.frame(width: .infinity, height: .infinity)
+           
+            .padding()
     }
+}
+
+#Preview {
+    @State var selectedDeviceType: DeviceType = .thermostat
+    @State var text: String = ""
+    @State var texteingabe: String = ""
+    @State var smartDevices: [SmartDevice] = [SmartDevice(id: UUID(), name: "Steckdose_1", type: .energie, isOn: false, isEnergie: true, temperature: 0.0, isLocked: false)]
+    
+    return geraetAnlegen(selectedDeviceType: $selectedDeviceType, text: $text, texteingabe: $texteingabe, smartDevices: $smartDevices)
 }

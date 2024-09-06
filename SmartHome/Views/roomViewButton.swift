@@ -15,9 +15,11 @@ struct roomViewButton: View {
             
             Image("room").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
                 .blur(radius: 4).cornerRadius(10)
+            
             Toggle(isOn: $anzeige , label: {
                 Text("Raumvorschau anzeigen")
             }) .padding().labelsHidden()
+            
             Image("room").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
                 .cornerRadius(10)
         }

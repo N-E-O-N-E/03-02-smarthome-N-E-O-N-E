@@ -40,6 +40,7 @@ struct RoomView: View {
                     Text("\(String(format: "%.1f",calcGauge))")
                         .foregroundColor(Color.white)
                         .font(.callout).bold()
+                    
                 } minimumValueLabel: {
                     Text("0")
                         .foregroundColor(Color.white)
@@ -54,6 +55,7 @@ struct RoomView: View {
                 .gaugeStyle(.accessoryCircular)
                 .tint(gradient)
                 .offset(CGSize(width: 60.0, height: 0.0))
+                
                 
                 
                 
@@ -89,6 +91,7 @@ struct RoomView: View {
                                             .foregroundColor(pos.isOn ? .yellow : .gray)
                                             .shadow(radius: 5)
                                             .padding(1)
+                                           
                                         
                                     } else if pos.type == .light && pos.isOn == false {
                                         Image(systemName: "lightbulb.fill")

@@ -13,28 +13,26 @@ struct GridView: View {
     
     var body: some View {
         
-        ZStack {
-            LazyVGrid(columns: spalten, spacing: 15) {
-                ForEach($smartDevices, id: \.id) { $device in
+        LazyVGrid(columns: spalten, spacing: 15) {
+            ForEach($smartDevices, id: \.id) { $device in
+                
+                switch device.type {
                     
-                    switch device.type {
-                        
-                    case .light:
-                        devicePanel(device: $device, smartDevices: $smartDevices)
-                        
-                    case .energie:
-                        devicePanel(device: $device, smartDevices: $smartDevices)
-                        
-                    case .schloss:
-                        devicePanel(device: $device, smartDevices: $smartDevices)
-                        
-                    case .thermostat:
-                        devicePanel(device: $device, smartDevices: $smartDevices)
-                        
-                    }
+                case .light:
+                    devicePanel(device: $device, smartDevices: $smartDevices)
+                    
+                case .energie:
+                    devicePanel(device: $device, smartDevices: $smartDevices)
+                    
+                case .schloss:
+                    devicePanel(device: $device, smartDevices: $smartDevices)
+                    
+                case .thermostat:
+                    devicePanel(device: $device, smartDevices: $smartDevices)
+                    
                 }
-            }.padding(10)
-        }
+            }
+        }.padding(10)
     }
 }
 

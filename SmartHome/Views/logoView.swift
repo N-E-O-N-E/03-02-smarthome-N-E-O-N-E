@@ -10,12 +10,14 @@ import SwiftUI
 struct logoView: View {
     var body: some View {
         
-        Image("logo")
+        Image("smartHome")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .shadow(radius: 1)
-        
-        
+            .cornerRadius(20)
+            .shadow(radius: 4)
+            .padding(10)
+            
+    
         Text("SmartHome Simulator")
             .font(.title)
             .bold()
