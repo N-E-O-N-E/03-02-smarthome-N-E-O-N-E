@@ -10,6 +10,8 @@ import SwiftUI
 struct logoView: View {
     var body: some View {
         
+        
+        
         Image("smartHome")
             .resizable()
             .aspectRatio(contentMode: .fit)
